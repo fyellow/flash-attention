@@ -17,6 +17,9 @@ import subprocess
 import urllib.request
 import urllib.error
 from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
+os.environ['CMAKE_GENERATOR'] = 'Visual Studio 17 2022'
+os.environ['CMAKE_GENERATOR_PLATFORM'] = 'x64'
+os.environ['CMAKE_GENERATOR_TOOLSET'] = 'host=x64'
 
 import torch
 from torch.utils.cpp_extension import (
@@ -278,6 +281,7 @@ if not SKIP_CUDA_BUILD and not IS_ROCM:
                         "--expt-relaxed-constexpr",
                         "--expt-extended-lambda",
                         "--use_fast_math",
+                        "-allow-unsupported-compiler",
                         # "--ptxas-options=-v",
                         # "--ptxas-options=-O2",
                         # "-lineinfo",
